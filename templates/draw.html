@@ -1,0 +1,16 @@
+{% extends "skeleton.html" %}
+{% block css %}
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'css/draw.css') }}">
+{% endblock %}
+{% block script %}
+<script defer>
+window.static_folder = "{{url_for('static', filename = 'assets/coloringPages/amongUs.png') }}";
+</script>
+<script defer type="text/javascript" src="{{url_for('static', filename = 'js/draw.js') }}"></script>
+
+{% endblock %}
+{% block body %} 
+
+<canvas id="drawCanvas" width="900" height="900"></canvas>
+
+{% endblock %} 

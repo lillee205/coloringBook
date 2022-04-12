@@ -1,0 +1,79 @@
+
+.blueBtn{
+    height: 2em;
+    width: 7.5em;
+    display: block;
+    margin: auto;
+    margin-bottom: 3vh;
+    line-height: 1.75em;
+    font-size: 4em;
+    z-index: 2;
+    position: relative;
+    top: 15vh;
+
+}
+
+.popupBox{
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    margin: 0;
+    max-width: 60%;
+    max-height: 80%;
+    height: auto;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+}
+.popupBox img{
+    object-fit: cover;
+    max-height: 100%;
+    max-width: 100%;
+}
+#confirmDrawing{
+    margin: auto;
+    position: relative;
+    top: 59vh;
+}
+#imgPreview{
+    background-color: blue;
+}
+#blueLine{
+    background-color: var(--turquoise);
+    height: 10px;
+    width: 100%;
+    margin-top: 23vh;
+    position: fixed;
+    z-index: 1;
+
+}
+
+#galleryContainer {
+    overflow-y: auto;
+    display: flex;
+    position: relative;
+    top:15vh;
+    justify-content: center;
+    align-items: center;
+    flex: 2 0 21%;
+    flex-wrap: wrap;
+    background-color: rgba(150,150,150,0);
+    width: 100%;
+    height: 60vh;
+}
+
+.gallItem{
+    height: 30vh;
+    width: 30vh;
+    margin: 2em;
+    background-color: white;
+    filter: drop-shadow(0px 4px 25px rgba(0, 0, 0, 0.3));
+    border-radius: 10px;
+    cursor: pointer;
+}
+.gallItem img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

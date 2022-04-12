@@ -1,0 +1,17 @@
+{% extends "skeleton.html" %}
+
+{% block css %} 
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'css/index.css') }}">
+{% endblock %}
+{% block script %}
+<script defer type="text/javascript" src="{{url_for('static', filename = 'js/index.js') }}"></script>
+{% endblock %}
+{% block body %} 
+<div id = "descContainer" class = "animate fadeInDown one">
+    <h1>coloringBook</h1>
+    <p>A fun and easy way to color!</p>
+</div>
+<div id ="startColor" class = "blueBtn animate fadeInDown one">START COLORING</div>
+<img src = "{{url_for('static', filename= 'assets/coloredPencilsTop.png' )}}" id = "colPenTop" class = "colPenBg" draggable="false">
+<img src = "{{url_for('static', filename= 'assets/coloredPencilsBottom.png' )}}" id = "colPenBot" class = "colPenBg" draggable="false">
+{% endblock %}

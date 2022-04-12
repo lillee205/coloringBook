@@ -1,0 +1,43 @@
+#descContainer{
+    position: absolute;
+    left: 6vw;
+    top: 35vh;
+    z-index: 3;
+    background-color: none;
+    height: 24vh;
+    width: 40vw;
+}
+h1{
+    font-size: 6em;
+    line-height: 0;
+}
+p{
+    font-size:2em;
+}
+.blueBtn{
+    z-index: 3;
+    position: absolute;
+    right: 10vw;
+    bottom: 30vh;
+    height: 2em;
+    width: 7.5em;
+    line-height: 1.75em;
+    filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.2));
+
+}
+.blueBtn:hover{
+    cursor: pointer;
+}
+.colPenBg {
+    width: 100%;
+    height:auto;
+    z-index: 0;
+}
+#colPenTop {
+    position: absolute;
+    top: 0;
+}
+#colPenBot {
+    position: absolute;
+    bottom: 0;
+}
