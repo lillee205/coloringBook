@@ -1,7 +1,5 @@
 from flask import Flask
-
 from routes import color
-import time 
 
 def create_app():
     app = Flask(__name__)

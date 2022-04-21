@@ -2,15 +2,18 @@
 {% block css %}
 <link rel = "stylesheet" href = "{{url_for('static', filename = 'css/draw.css') }}">
 {% endblock %}
+
 {% block script %}
 <script defer>
 window.static_folder = "{{url_for('static', filename = 'assets/coloringPages/amongUs.png') }}";
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 <script defer type="text/javascript" src="{{url_for('static', filename = 'js/draw.js') }}"></script>
-
 {% endblock %}
 {% block body %} 
 
-<canvas id="drawCanvas" width="900" height="900"></canvas>
-
+<canvas id="drawCanvas" width="600" height="600"></canvas>
+<div id = "toolbox">
+    <div id="picker"></div>
+</div>
 {% endblock %} 

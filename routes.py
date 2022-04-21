@@ -1,12 +1,13 @@
 from flask import Flask, render_template, jsonify, url_for, redirect, Blueprint, request
-from alg import updateImage
-import os
+from sklearn.metrics import zero_one_loss
+from alg import canvasObject
+import os, io
 import base64
 from io import BytesIO
 import numpy as np
 from PIL import Image
 from matplotlib import pyplot as plt
-import json 
+import json, requests
 color = Blueprint('color', __name__,
                   template_folder="templates", static_folder="static")
 
@@ -26,23 +27,39 @@ def gallery():
 def draw():
     return render_template("draw.html")
 
+@color.route('/bgprocess', methods=['GET', 'POST'])
+def bgprocess():
+    print("hall")
+    if request.method == 'POST':
+        print("Image recieved")
+        data_url = request.values['imgUrl']
+        color = json.loads(json.dumps(request.values['color']))
+        print("color is", color)
+        img_bytes = base64.b64decode(data_url.split(",")[1])
+        img = Image.open(BytesIO(img_bytes))
+        img  = np.array(img)
 
-color.route("/bg_process/", methods=['GET', 'POST'])
-def bg_process():
-    print("Image recieved")
-    print(request)
-    # data_url = request.values['imageBase64']
-    # Decoding base64 string to bytes object
-    # img_bytes = base64.b64decode(data_url)
-    # blob = request.files['image']
-    # image_object = Image.open(blob)
-    # img = np.array(img)
-    # print(img)
-    # im = Image.fromarray(A)
-    # im.save("your_file.jpeg")
+        with open('test.txt', 'w') as outfile:
+            for slice_2d in img:
+                np.savetxt(outfile, slice_2d.astype(int))
 
-    # canvas = array returned by json process
-    #updateImage(canvas,x,y,color)
+        # canvas = array returned by json process
+        x = int(request.values['x'])
+        y = int(request.values['y'])
+
+        canvasObj = canvasObject(img)
+        canvasObj.updateImage(x,y,[255,0,0,255])
+        canvas = canvasObj.canvas 
+
+        imaa = Image.fromarray(canvas.astype('uint8'), mode='RGBA')
+        # print("image has been saved")
+        # imaa.save("your_file.png")
+
+        im_file = BytesIO()
+        imaa.save(im_file, format="PNG")
+        im_bytes = im_file.getvalue()  # im_bytes: image in binary format.
+        imgByteArr = base64.encodebytes(im_bytes).decode('ascii')
+        return jsonify(result=imgByteArr)
     # return the modified array
     return jsonify(result="Error")
  

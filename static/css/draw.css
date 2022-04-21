@@ -1,3 +1,7 @@
 #drawCanvas{
     border: black solid 1px;
 }
+
+#toolbox{
+    display: inline-block;
+}
