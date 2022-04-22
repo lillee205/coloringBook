@@ -5,7 +5,7 @@ import os, io
 import base64
 from io import BytesIO
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 from matplotlib import pyplot as plt
 import json, requests
 color = Blueprint('color', __name__,
@@ -29,37 +29,39 @@ def draw():
 
 @color.route('/bgprocess', methods=['GET', 'POST'])
 def bgprocess():
-    print("hall")
+    # when we make edit on canvas, we send to python
     if request.method == 'POST':
         print("Image recieved")
+
+        # decode image
         data_url = request.values['imgUrl']
-        color = json.loads(json.dumps(request.values['color']))
-        print("color is", color)
         img_bytes = base64.b64decode(data_url.split(",")[1])
         img = Image.open(BytesIO(img_bytes))
-        img  = np.array(img)
+        img = img.convert("RGBA")
 
-        with open('test.txt', 'w') as outfile:
-            for slice_2d in img:
-                np.savetxt(outfile, slice_2d.astype(int))
-
-        # canvas = array returned by json process
+        # get x,y coordinates clicked
         x = int(request.values['x'])
         y = int(request.values['y'])
 
-        canvasObj = canvasObject(img)
-        canvasObj.updateImage(x,y,[255,0,0,255])
-        canvas = canvasObj.canvas 
+        # get color we want to use
+        color = json.loads(json.loads(json.dumps(request.values['color'])))
 
-        imaa = Image.fromarray(canvas.astype('uint8'), mode='RGBA')
-        # print("image has been saved")
-        # imaa.save("your_file.png")
+        # fill algorithm
+        ImageDraw.floodfill(img, (x, y), (color["r"], color["g"], color["b"], 255), thresh=200)
+        img.save("geeks.png")
+        # canvasObj = canvasObject(img)
+        # canvasObj.updateImage(x,y,[color["r"], color["g"], color["b"], 255])
+        # canvas = canvasObj.canvas 
+
+        # take edited array and save in correct format to send back to JS
+        # imaa = Image.fromarray(canvas.astype('uint8'), mode='RGBA')
 
         im_file = BytesIO()
-        imaa.save(im_file, format="PNG")
+        img.save(im_file, format="PNG")
         im_bytes = im_file.getvalue()  # im_bytes: image in binary format.
         imgByteArr = base64.encodebytes(im_bytes).decode('ascii')
+        print("done")
+
         return jsonify(result=imgByteArr)
-    # return the modified array
     return jsonify(result="Error")
  

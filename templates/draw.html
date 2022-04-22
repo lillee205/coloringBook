@@ -1,6 +1,7 @@
 {% extends "skeleton.html" %}
 {% block css %}
 <link rel = "stylesheet" href = "{{url_for('static', filename = 'css/draw.css') }}">
+<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 {% endblock %}
 
 {% block script %}
@@ -15,5 +16,11 @@ window.static_folder = "{{url_for('static', filename = 'assets/coloringPages/amo
 <canvas id="drawCanvas" width="600" height="600"></canvas>
 <div id = "toolbox">
     <div id="picker"></div>
+    <div id = "penOrErase">
+        <div id = "pen">
+        </div>
+        <div id = "erase"></div>
+        <div id = "save"></div>
+    </div>
 </div>
 {% endblock %} 

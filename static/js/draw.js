@@ -20,8 +20,6 @@ $(function() {
 	}
 	colorPicker.on('color:change', function(color, changes){
 		currentColor = color.rgb
-		console.log(currentColor)
-	// when the color has changed, the callback gets passed the color object and an object providing which color channels (out of H, S, V) have changed.
 	})
 	var xPos = 0
 	var yPos =0
@@ -50,9 +48,7 @@ $(function() {
 	$('#drawCanvas').bind('click', function(e){
 		fill(e)
 		// get location where clicked
-		var x,y = [e.clientX , e.clientY]
-		var desColor = [255,3,0]
-		var newImg = document.createElement('img')
+
 		canvas.toBlob(function(blob) {
 			//var url = URL.createObjectURL(blob);
 			var imgURL = canvas.toDataURL();
@@ -91,10 +87,11 @@ $(function() {
 	function fill(evt) {
 		var pos = getMousePos(canvas, evt);
 
-		ctx.fillStyle = "#FF0000";
+		ctx.fillStyle = "#fdb813";
 		xPos = pos.x
 		yPos = pos.y 
-		ctx.fillRect (pos.x, pos.y, 4, 4);
+		console.log(pos.x,pos.y)
+		ctx.fillRect (pos.x, pos.y, 8, 8);
 	}
 
 	function getMousePos(canvas, evt) {

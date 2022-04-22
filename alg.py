@@ -1,4 +1,6 @@
 import numpy as np
+from skimage import data, filters, color, morphology
+from skimage.segmentation import flood, flood_fill
 
 class canvasObject() :
     def __init__(self, canvas):
