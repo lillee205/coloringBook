@@ -19,8 +19,9 @@ def index():
 def gallery():
     print(str(len(os.listdir("static/assets/coloringPages"))))
     args = {
-        "numFiles": len(os.listdir("static/assets/coloringPages"))
+        "files": os.listdir("static/assets/coloringPages")
     }
+    print(args['files'])
     return render_template("gallery.html", **args)
 
 @color.route("/draw")

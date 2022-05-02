@@ -14,9 +14,9 @@
 <div id = "blueLine"></div>
 <div class = "blueBtn">Select Drawing</div>
 <div id = "galleryContainer">
-    {%for i in range(0, numFiles)%}
+    {%for i in range(files | length)%}
     <div class = "gallItem">
-        <img src = "{{url_for('static', filename = 'assets/coloringPages/amongUs.png') }}">
+        <img src = "{{url_for('static', filename = 'assets/coloringPages/' + files[i]) }}">
     </div>
     {%endfor%}
 
